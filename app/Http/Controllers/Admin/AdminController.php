@@ -49,6 +49,7 @@ class AdminController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
+            $user->role = "Employee";
             $user->save();
             $request->session()->flash('newEmployee', $user->name);
             return redirect()->route('admin.adminPanel.index');

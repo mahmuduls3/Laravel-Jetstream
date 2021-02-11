@@ -40,8 +40,8 @@
 						<td style="vertical-align: middle;">{{$user->created_at}}</td>
 						<td style="vertical-align: middle;">{{$user->updated_at}}</td>
 						<td style="vertical-align: middle;">
-							<a href="{{route('admin.adminPanel.edit', $user->id)}}"><button class="btn btn-outline-warning">Edit</button></a>
-							<a href="{{route('admin.adminPanel.show', $user->id)}}"><button class="btn btn-outline-danger">Delete</button></a>
+							<a href="{{route('adminPanel.edit', $user->id)}}"><button class="btn btn-outline-warning">Edit</button></a>
+							<a href="{{route('adminPanel.show', $user->id)}}"><button class="btn btn-outline-danger">Delete</button></a>
 						</td>
 					</tr>
 					@endforeach
@@ -63,7 +63,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form method="POST" action="{{route('admin.adminPanel.store')}}" class="ml-0 col-md-12 col-lg-12 col-sm-12 col-xs-12">
+					<form method="POST" action="{{route('adminPanel.store')}}" class="ml-0 col-md-12 col-lg-12 col-sm-12 col-xs-12">
 					@csrf
 						<div class="form-group">
 							<label >Name</label>

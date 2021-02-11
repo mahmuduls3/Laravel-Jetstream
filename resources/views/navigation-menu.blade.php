@@ -17,14 +17,20 @@
                     </x-jet-nav-link>
 
                     @if (auth()->user()->role == 'Admin')
-                    <x-jet-nav-link href="{{ route('admin.adminPanel.index')}}" :active="request()->routeIs('admin.adminPanel.index')">
+                    <x-jet-nav-link href="{{ route('adminPanel.index')}}" :active="request()->routeIs('adminPanel.index')">
                         {{ __('Employees') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('location.index')}}" :active="request()->routeIs('location.index')">
+                        {{ __('Locations') }}
                     </x-jet-nav-link>
                     @endif 
 
                     @if (auth()->user()->role == 'Employee')
-                    <x-jet-nav-link href="{{ route('employee.employeePanel.index')}}" :active="request()->routeIs('employee.employeePanel.index')">
+                    <x-jet-nav-link href="{{ route('employeePanel.index')}}" :active="request()->routeIs('employeePanel.index')">
                         {{ __('Employee nav') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('location.index')}}" :active="request()->routeIs('location.index')">
+                        {{ __('Locations') }}
                     </x-jet-nav-link>
                     @endif
 
