@@ -15,6 +15,7 @@ class CreateLocationsTable extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
+            $table->string('image')->nullable();
             $table->string('place')->nullable();
             $table->string('country')->nullable();
             $table->string('country_code')->nullable();
@@ -23,8 +24,8 @@ class CreateLocationsTable extends Migration
             $table->integer('days')->nullable();
             $table->integer('nights')->nullable();
             $table->string('package_name')->nullable();
-            $table->string('package_Style');
-            $table->string('description')->nullable();
+            $table->string('package_style');
+            $table->text('description')->nullable();
             $table->integer('price')->nullable();
             $table->string('status');
             $table->string('edited_by');

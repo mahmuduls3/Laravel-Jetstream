@@ -3,7 +3,7 @@
         <h3 class="font-semibold text-xl text-gray-800 leading-tight">Update Location</h3>
     </x-slot>
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-        <form method="POST" action="{{route('location.update', $location->id)}}" class="ml-0 col-md-6 col-lg-6 col-sm-8 col-xs-12">
+        <form method="POST" action="{{route('location.update', $location->id)}}" enctype="multipart/form-data" class="ml-0 col-md-6 col-lg-6 col-sm-8 col-xs-12">
             @csrf
             @method('PUT')
             <table class="table">
@@ -11,6 +11,14 @@
                     <tr>
                         <th scope="row">Id</th>
                         <td>{{$location->id}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Image</th>
+                        <td>
+                            <img style="width: 300px;" src="uploads/locations/{{$location->image}}" alt="{{$location->place}}">
+                            <input type="file" name="image" class="form-control"  value="{{old('image')}}">
+                            <span style="color: red;"> @error('image'){{$message}} @enderror </span>
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row">Place</th>
@@ -69,6 +77,23 @@
                         </td>
                     </tr>
                     <tr>
+                        <th scope="row">Package Style</th>
+                        <td>
+                            <select name="package_style" id="" class="form-control">
+                                <option {{ ($location->package_style) == 'domestic' ? 'selected' : '' }} value="domestic">Domestic</option>
+                                <option {{ ($location->package_style) == 'international' ? 'selected' : '' }} value="international">International</option>
+                            </select>
+                            <span style="color: red;"> @error('status'){{$message}} @enderror </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Description</th>
+                        <td>
+                            <input class="form-control" type="text" name="description" value="{{$location->description}}">
+                            <span style="color: red;"> @error('description'){{$message}} @enderror </span>
+                        </td>
+                    </tr>
+                    <tr>
                         <th scope="row">Price</th>
                         <td>
                             <input class="form-control" type="number" name="price" value="{{$location->price}}">
@@ -86,9 +111,16 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <input type="hidden" name="edited_by" class="form-control"  placeholder="" value="{{ Auth::user()->name }}" required>
-                        </td>
+                        <th scope="row">Edited By</th>
+                        <td>{{$location->edited_by}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Created At</th>
+                        <td>{{$location->created_at}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Updated At</th>
+                        <td>{{$location->updated_at}}</td>
                     </tr>
                 </tbody>
             </table>

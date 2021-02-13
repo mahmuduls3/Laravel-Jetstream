@@ -18,16 +18,14 @@
 				<thead class="thead-dark">
 					<tr>
 						<th scope="col">Id</th>
+						<th scope="col">Image</th>
 						<th scope="col">Place</th>
-						<th scope="col">Country</th>
-						<th scope="col">Country Code</th>
 						<th scope="col">Airport</th>
-						<th scope="col">Airport Code</th>
-						<th scope="col">Days</th>
-                        <th scope="col">Nights</th>
 						<th scope="col">Package Name</th>
+						<th scope="col">Package Style</th>
 						<th scope="col">Price</th>
 						<th scope="col">Status</th>
+						<th scope="col">Edited By</th>
 						<th scope="col">Created At</th>
                         <th scope="col">Updated At</th>
                         <th scope="col">Action</th>
@@ -37,16 +35,14 @@
 					@foreach($locations as $location)
 					<tr>
 						<td style="vertical-align: middle;">{{$location->id}}</td>
+						<td style="vertical-align: middle;"><img style="width: 100px;" src="uploads/locations/{{$location->image}}" alt="{{$location->place}}"></td>
 						<td style="vertical-align: middle;">{{$location->place}}</td>
-						<td style="vertical-align: middle;">{{$location->country}}</td>
-                        <td style="vertical-align: middle;">{{$location->country_code}}</td>
 						<td style="vertical-align: middle;">{{$location->airport}}</td>
-						<td style="vertical-align: middle;">{{$location->airport_code}}</td>
-                        <td style="vertical-align: middle;">{{$location->days}}</td>
-						<td style="vertical-align: middle;">{{$location->nights}}</td>
 						<td style="vertical-align: middle;">{{$location->package_name}}</td>
+						<td style="vertical-align: middle;">{{$location->package_style}}</td>
                         <td style="vertical-align: middle;">{{$location->price}}</td>
 						<td style="vertical-align: middle;">{{$location->status}}</td>
+						<td style="vertical-align: middle;">{{$location->edited_by}}</td>
 						<td style="vertical-align: middle;">{{$location->created_at}}</td>
 						<td style="vertical-align: middle;">{{$location->updated_at}}</td>
 						<td style="vertical-align: middle;">
@@ -73,8 +69,13 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form method="POST" action="{{route('location.store')}}" class="ml-0 col-md-12 col-lg-12 col-sm-12 col-xs-12">
+					<form method="POST" action="{{route('location.store')}}" enctype="multipart/form-data" class="ml-0 col-md-12 col-lg-12 col-sm-12 col-xs-12">
 					@csrf
+						<div class="form-group">
+							<label class="col-form-label">Place Image (Recommended size: 700 x 460)</label>
+							<input type="file" name="image" class="form-control"  value="{{old('image')}}">
+							<span style="color: red;"> @error('image'){{$message}} @enderror </span>
+						</div>
 						<div class="form-group">
 							<label class="col-form-label">Place</label>
 							<input type="text" name="place" class="form-control"  placeholder="Enter place's name..." value="{{old('place')}}" required>

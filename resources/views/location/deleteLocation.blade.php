@@ -13,6 +13,10 @@
                         <td>{{$location->id}}</td>
                     </tr>
                     <tr>
+                        <th scope="row">Image</th>
+                        <td><img style="width: 300px;" src="uploads/locations/{{$location->image}}" alt="{{$location->place}}"></td>
+                    </tr>
+                    <tr>
                         <th scope="row">Place</th>
                         <td>{{$location->place}}</td>
                     </tr>
@@ -45,12 +49,24 @@
                         <td>{{$location->package_name}}</td>
                     </tr>
                     <tr>
+                        <th scope="row">Package Style</th>
+                        <td>{{$location->package_style}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Description</th>
+                        <td>{{$location->status}}</td>
+                    </tr>
+                    <tr>
                         <th scope="row">Price</th>
                         <td>{{$location->price}}</td>
                     </tr>
                     <tr>
                         <th scope="row">Status</th>
                         <td>{{$location->status}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Edited By</th>
+                        <td>{{$location->edited_by}}</td>
                     </tr>
                     <tr>
                         <th scope="row">Created At</th>

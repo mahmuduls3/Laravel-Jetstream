@@ -37,28 +37,37 @@ class LocationController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
+            'image' => 'image | required | mimes:jpg,png,jpeg,gif,svg | max: 2048 | dimensions:min_width=100,min_height=100',
             'place' => 'required | min: 3 | max: 255',
             'country' => 'required | min: 3',
         ]);
 
-        if($validate){
-            $location = new Location;
-            $location->place = $request->place;
-            $location->country = $request->country;
-            $location->country_code = $request->country_code;
-            $location->airport = $request->airport;
-            $location->airport_code = $request->airport_code;
-            $location->days = $request->days;
-            $location->nights = $request->nights;
-            $location->package_name = $request->package_name;
-            $location->package_style = $request->package_style;
-            $location->description = $request->description;
-            $location->price = $request->price;
-            $location->status = $request->status;
-            $location->edited_by = $request->edited_by;
-            $location->save();
-            $request->session()->flash('newLocation', $location->place);
-            return redirect()->route('location.index');
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = $request->place . '.' . $extension;
+            $file->move('uploads/locations/', $filename);
+
+            if($validate){
+                $location = new Location;
+                $location->image = $filename;
+                $location->place = $request->place;
+                $location->country = $request->country;
+                $location->country_code = $request->country_code;
+                $location->airport = $request->airport;
+                $location->airport_code = $request->airport_code;
+                $location->days = $request->days;
+                $location->nights = $request->nights;
+                $location->package_name = $request->package_name;
+                $location->package_style = $request->package_style;
+                $location->description = $request->description;
+                $location->price = $request->price;
+                $location->status = $request->status;
+                $location->edited_by = $request->edited_by;
+                $location->save();
+                $request->session()->flash('newLocation', $location->place);
+                return redirect()->route('location.index');
+            }
         }
     }
 
@@ -96,28 +105,40 @@ class LocationController extends Controller
     public function update(Request $request, $id)
     {
         $validate = $request->validate([
+            'image' => 'image | required | mimes:jpg,png,jpeg,gif,svg | max: 2048 | dimensions:min_width=100,min_height=100',
             'place' => 'required | min: 3 | max: 255',
             'country' => 'required | min: 3',
         ]);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = $request->place . '.' . $extension;
+            $file->move('uploads/locations/', $filename);
         
-        if($validate){
-            Location::where('id', $id)
-                    ->update(['place' => $request->place,
-                              'country' => $request->country,
-                              'country_code' => $request->country_code,
-                              'airport' => $request->airport,
-                              'airport_code' => $request->airport_code,
-                              'days' => $request->days,
-                              'nights' => $request->nights,
-                              'package_name' => $request->package_name,
-                              'package_style' => $request->package_style,
-                              'description' => $request->description,
-                              'price' => $request->price,
-                              'status' => $request->status,
-                              'edited_by' => $request->edited_by,
-                            ]);
-            $request->session()->flash('updateEmployee', $request->place);
-            return redirect()->route('location.index');
+            $sessionValue =  auth()->user()->name;
+            if($sessionValue){
+                if($validate){
+                    Location::where('id', $id)
+                            ->update(['image' => $filename,
+                                    'place' => $request->place,
+                                    'country' => $request->country,
+                                    'country_code' => $request->country_code,
+                                    'airport' => $request->airport,
+                                    'airport_code' => $request->airport_code,
+                                    'days' => $request->days,
+                                    'nights' => $request->nights,
+                                    'package_name' => $request->package_name,
+                                    'package_style' => $request->package_style,
+                                    'description' => $request->description,
+                                    'price' => $request->price,
+                                    'status' => $request->status,
+                                    'edited_by' => $sessionValue,
+                                    ]);
+                    $request->session()->flash('updateLocation', $request->place);
+                    return redirect()->route('location.index');
+                }
+            }
         }
     }
 
