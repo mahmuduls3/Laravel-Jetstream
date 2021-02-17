@@ -14,7 +14,7 @@
                     </tr>
                     <tr>
                         <th scope="row">Image</th>
-                        <td><img style="width: 300px;" src="uploads/locations/{{$location->image}}" alt="{{$location->place}}"></td>
+                        <td><img style="width: 200px;" src="{{URL::asset('storage/locations/'.$location->image)}}" alt="{{$location->place}}"></td>
                     </tr>
                     <tr>
                         <th scope="row">Place</th>

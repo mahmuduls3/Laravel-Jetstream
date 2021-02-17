@@ -15,7 +15,7 @@
                     <tr>
                         <th scope="row">Image</th>
                         <td>
-                            <img style="width: 300px;" src="uploads/locations/{{$location->image}}" alt="{{$location->place}}">
+                            <img style="width: 200px;" src="{{URL::asset('storage/locations/'.$location->image)}}" alt="{{$location->place}}">
                             <input type="file" name="image" class="form-control"  value="{{old('image')}}">
                             <span style="color: red;"> @error('image'){{$message}} @enderror </span>
                         </td>

@@ -46,7 +46,7 @@ class LocationController extends Controller
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = $request->place . '.' . $extension;
-            $file->move('uploads/locations/', $filename);
+            $file->move('storage/locations/', $filename);
 
             if($validate){
                 $location = new Location;
@@ -114,7 +114,7 @@ class LocationController extends Controller
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = $request->place . '.' . $extension;
-            $file->move('uploads/locations/', $filename);
+            $file->move('storage/locations/', $filename);
         
             $sessionValue =  auth()->user()->name;
             if($sessionValue){

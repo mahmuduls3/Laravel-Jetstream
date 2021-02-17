@@ -35,7 +35,7 @@
 					@foreach($locations as $location)
 					<tr>
 						<td style="vertical-align: middle;">{{$location->id}}</td>
-						<td style="vertical-align: middle;"><img style="width: 100px;" src="uploads/locations/{{$location->image}}" alt="{{$location->place}}"></td>
+						<td style="vertical-align: middle;"><img style="width: 150px;" src="{{URL::asset('storage/locations/'.$location->image)}}" alt="{{$location->place}}"></td>
 						<td style="vertical-align: middle;">{{$location->place}}</td>
 						<td style="vertical-align: middle;">{{$location->airport}}</td>
 						<td style="vertical-align: middle;">{{$location->package_name}}</td>
@@ -118,7 +118,7 @@
 						</div>
 						<div class="form-group">
 							<label class="col-form-label">Package Style</label>
-                            <select name="package_style" id="">
+                            <select name="package_style" id="package_style">
                                 <option value="domestic">Domestic</option>
                                 <option value="international">International</option>
                             </select>
@@ -126,7 +126,7 @@
 						</div>
 						<div class="form-group">
 							<label class="col-form-label">Description</label>
-							<textarea name="description" class="form-control" id="" cols="30" rows="5" value="{{old('description')}}"></textarea>
+							<textarea name="description" class="form-control" id="description" cols="30" rows="5" value="{{old('description')}}"></textarea>
 							<span style="color: red;"> @error('description'){{$message}} @enderror </span>
 						</div>
                         <div class="form-group">
@@ -136,7 +136,7 @@
 						</div>
                         <div class="form-group">
 							<label class="col-form-label">Status</label>
-                            <select name="status" id="">
+                            <select name="status" id="status">
                                 <option value="normal">Normal</option>
                                 <option value="featured">Featured</option>
                             </select>

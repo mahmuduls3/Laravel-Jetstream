@@ -3,7 +3,7 @@
         <h3 class="font-semibold text-xl text-gray-800 leading-tight">Delete Employee</h3>
     </x-slot>
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-        <form method="POST" action="{{route('admin.adminPanel.destroy', $user->id)}}" class="ml-0 col-md-6 col-lg-6 col-sm-8 col-xs-12">
+        <form method="POST" action="{{route('adminPanel.destroy', $user->id)}}" class="ml-0 col-md-6 col-lg-6 col-sm-8 col-xs-12">
             @csrf
             @method('DELETE')
             <table class="table">
